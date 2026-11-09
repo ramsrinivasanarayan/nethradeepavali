@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="title" content="Happy Deepavali Nethra | Ram">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Kannada:wght@500;700&family=Pacifico&family=Poppins:wght@600;800&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="./css/program.css">
+	<title>Happy Deepavali Nethra | Ram</title>
+</head>
+
+<body>
+	<div class="title">
+		<span class="line1">🪔 Happy Deepavali 🪔</span>
+		<span class="line2">Nethra 💗</span>
+	</div>
+
+	<div class="scene">
+		<div class="cube" id="cube">
+			<div class="outer-cube">
+				<div class="outer-front"><img src="images/web/A2.jpg" alt=""></div>
+				<div class="outer-right"><img src="images/web/A3.jpg" alt=""></div>
+				<div class="outer-back"><img src="images/web/A4.jpg" alt=""></div>
+				<div class="outer-left"><img src="images/web/A5.jpg" alt=""></div>
+				<div class="outer-top"><img src="images/web/A1.jpg" alt=""></div>
+				<div class="outer-bottom"><img src="images/web/B4.jpg" alt=""></div>
+			</div>
+			<div class="inner-cube">
+				<div class="inner-front"><img src="images/web/B3.jpg" alt=""></div>
+				<div class="inner-right"><img src="images/web/A1.jpg" alt=""></div>
+				<div class="inner-back"><img src="images/web/B4.jpg" alt=""></div>
+				<div class="inner-left"><img src="images/web/A4.jpg" alt=""></div>
+				<div class="inner-top"><img src="images/web/B1.jpg" alt=""></div>
+				<div class="inner-bottom"><img src="images/web/B2.jpg" alt=""></div>
+			</div>
+		</div>
+	</div>
+
+	<div class="wish">
+		<p class="kn-big">ದೀಪಾವಳಿ ಹಬ್ಬದ ಹಾರ್ದಿಕ ಶುಭಾಶಯಗಳು ✨</p>
+		<p class="kn">ದೀಪಗಳ ಬೆಳಕು ನಿಮ್ಮ ಬಾಳನ್ನು ಸಂತೋಷ, ಆರೋಗ್ಯ ಮತ್ತು ಪ್ರೀತಿಯಿಂದ ಬೆಳಗಲಿ 🪔</p>
+		<p class="kn love">ಸ್ನೇಹಿತ Ram ಕಡೆಯಿಂದ 💗</p>
+	</div>
+
+	<div class="tip">Tap the cube ✨</div>
+
+	<div id="copy"><p>— Ram</p></div>
+	<audio id="song" src="audio/song.mp3" loop preload="auto"></audio>
+	<button id="muteBtn" aria-label="Mute or unmute music">🔊</button>
+
+	<script>
+		// tap / click the cube to open it (works on phones, where there is no hover)
+		var cube = document.getElementById("cube");
+		cube.addEventListener("click", function () { cube.classList.toggle("open"); });
+
+		// background song: browsers only allow sound after the visitor interacts,
+		// so try straight away and again on the first tap/click/key
+		var song = document.getElementById("song"), muteBtn = document.getElementById("muteBtn");
+		function playSong() {
+			song.play().then(function () {
+				["click", "touchstart", "keydown"].forEach(function (e) { document.removeEventListener(e, playSong); });
+			}).catch(function () {});
+		}
+		["click", "touchstart", "keydown"].forEach(function (e) { document.addEventListener(e, playSong); });
+		playSong();
+		muteBtn.addEventListener("click", function (e) {
+			e.stopPropagation();
+			song.muted = !song.muted;
+			muteBtn.textContent = song.muted ? "🔇" : "🔊";
+			if (song.paused) playSong();
+		});
+	</script>
+</body>
+
+</html>
